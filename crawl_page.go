@@ -39,7 +39,7 @@ func crawlPage(rawBaseURL, rawCurrentURL string, pages map[string]int) {
 
 	fmt.Printf("crawling %s\n", rawCurrentURL)
 
-	htmlBody, err := getHTML(rawCurrentURL)
+	htmlBody, err := getHTMLBootdev(rawCurrentURL)
 	if err != nil {
 		fmt.Printf("Error - getHTML: %v", err)
 		return
