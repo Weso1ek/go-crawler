@@ -20,4 +20,12 @@ func main() {
 	}
 
 	fmt.Println("starting crawl of: ", os.Args[1])
+
+	respBody, err := getHTML(os.Args[1])
+
+	if err != nil {
+		os.Exit(1)
+	}
+
+	fmt.Println(respBody)
 }
