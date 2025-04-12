@@ -21,11 +21,16 @@ func main() {
 
 	fmt.Println("starting crawl of: ", os.Args[1])
 
-	respBody, err := getHTML(os.Args[1])
+	//respBody, err := getHTML(os.Args[1])
+	_, err := getHTML(os.Args[1])
 
 	if err != nil {
 		os.Exit(1)
 	}
 
-	fmt.Println(respBody)
+	//fmt.Println(respBody)
+
+	pages := make(map[string]int)
+
+	crawlPage(os.Args[1], os.Args[1], pages)
 }

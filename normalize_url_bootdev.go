@@ -19,7 +19,7 @@ func normalizeURLBootdev(rawURL string) (string, error) {
 
 	fullPath = strings.TrimSuffix(fullPath, "/")
 
-	return fullPath, nil
+	return parsedURL.Scheme + "://" + fullPath, nil
 }
 
 func getURLsFromHTMLBootdev(htmlBody, rawBaseURL string) ([]string, error) {
