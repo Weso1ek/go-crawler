@@ -22,11 +22,11 @@ func normalizeURLBootdev(rawURL string) (string, error) {
 	return parsedURL.Scheme + "://" + fullPath, nil
 }
 
-func getURLsFromHTMLBootdev(htmlBody, rawBaseURL string) ([]string, error) {
-	baseURL, err := url.Parse(rawBaseURL)
-	if err != nil {
-		return nil, fmt.Errorf("couldn't parse base URL: %v", err)
-	}
+func getURLsFromHTMLBootdev(htmlBody string, baseURL *url.URL) ([]string, error) {
+	//baseURL, err := url.Parse(rawBaseURL)
+	//if err != nil {
+	//	return nil, fmt.Errorf("couldn't parse base URL: %v", err)
+	//}
 
 	htmlReader := strings.NewReader(htmlBody)
 	doc, err := html.Parse(htmlReader)
