@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/url"
+	"sort"
 	"sync"
 )
 
@@ -42,4 +43,28 @@ func configure(rawBaseURL string, maxConcurrency int, maxPages int) (*config, er
 		wg:                 &sync.WaitGroup{},
 		maxPages:           maxPages,
 	}, nil
+}
+
+func printReport(pages map[string]int, baseURL string) {
+	fmt.Println("=============================")
+	fmt.Printf("  REPORT for %s\n", baseURL)
+	fmt.Println("=============================")
+
+	type kv struct {
+		Key   string
+		Value int
+	}
+
+	var ss []kv
+	for k, v := range pages {
+		ss = append(ss, kv{k, v})
+	}
+
+	sort.Slice(ss, func(i, j int) bool {
+		return ss[i].Value > ss[j].Value
+	})
+
+	for _, kv := range ss {
+		fmt.Printf("Found %d internal links to %s\n", kv.Value, kv.Key)
+	}
 }
