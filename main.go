@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func main() {
-
 	args := os.Args[1:]
 
 	if len(args) < 1 {
@@ -14,7 +14,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if len(args) > 1 {
+	if len(args) > 3 {
 		fmt.Println("too many arguments provided")
 		os.Exit(1)
 	}
@@ -22,9 +22,11 @@ func main() {
 	fmt.Println("starting crawl of: ", os.Args[1])
 
 	rawBaseURL := os.Args[1]
+	maxConcurrency, _ := strconv.Atoi(os.Args[2])
+	maxPages, _ := strconv.Atoi(os.Args[3])
 
-	const maxConcurrency = 3
-	cfg, err := configure(rawBaseURL, maxConcurrency)
+	//const maxConcurrency = 3
+	cfg, err := configure(rawBaseURL, maxConcurrency, maxPages)
 	if err != nil {
 		fmt.Printf("Error - configure: %v", err)
 		return
